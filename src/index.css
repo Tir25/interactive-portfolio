@@ -1,0 +1,481 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* Ensure smooth scrolling is applied globally and properly */
+  scroll-behavior: smooth;
+}
+
+/* Typography */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    will-change: transform, opacity; /* Performance optimization for animated headings */
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    line-height: 1.3;
+  }
+  
+  h3 {
+    font-size: 1.75rem;
+    line-height: 1.3;
+  }
+  
+  p, span, a, div, button {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+  }
+  
+  p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .font-display {
+    font-family: 'Playfair Display', serif;
+  }
+  
+  .font-body {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  /* Responsive typography */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+    
+    h2 {
+      font-size: 1.75rem;
+    }
+    
+    h3 {
+      font-size: 1.5rem;
+    }
+    
+    p {
+      font-size: 0.95rem;
+    }
+  }
+}
+
+/* Futuristic UI Effects */
+@layer components {
+  .text-glow {
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
+  }
+  
+  .text-glow-lg {
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.4);
+  }
+
+  .drop-shadow-glow {
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 255, 255, 0.5);
+  }
+
+  .blue-glow {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.5), 0 0 30px rgba(59, 130, 246, 0.3);
+    will-change: transform, opacity; /* Performance optimization for animated elements */
+  }
+
+  .purple-glow {
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.5), 0 0 30px rgba(139, 92, 246, 0.3);
+    will-change: transform, opacity;
+  }
+
+  .cyan-glow {
+    box-shadow: 0 0 15px rgba(34, 211, 238, 0.5), 0 0 30px rgba(34, 211, 238, 0.3);
+    will-change: transform, opacity;
+  }
+  
+  /* Twinkle animation for hero text */
+  @keyframes twinkle {
+    0% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.1), 0 0 10px rgba(59, 130, 246, 0.2); }
+    25% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 20px rgba(59, 130, 246, 0.5), 0 0 30px rgba(147, 51, 234, 0.3); }
+    50% { text-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 30px rgba(59, 130, 246, 0.8), 0 0 40px rgba(147, 51, 234, 0.5); }
+    75% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 20px rgba(59, 130, 246, 0.5), 0 0 30px rgba(147, 51, 234, 0.3); }
+    100% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.1), 0 0 10px rgba(59, 130, 246, 0.2); }
+  }
+  
+  .twinkle-text {
+    animation: twinkle 3s infinite ease-in-out;
+    will-change: text-shadow; /* Performance optimization for text shadow animation */
+  }
+  
+  .futuristic-border {
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    position: relative;
+  }
+  
+  .futuristic-border::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .futuristic-border:hover::after {
+    opacity: 1;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+  }
+  
+  .glass-effect {
+    background: rgba(17, 25, 40, 0.5);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  /* 3D Card Flip Animation */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+  
+  /* Skill Card Animations - Optimize performance */
+  @keyframes pulse-glow {
+    0% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.4); }
+    100% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
+  }
+  
+  .pulse-glow {
+    animation: pulse-glow 2s infinite ease-in-out;
+    will-change: box-shadow; /* Performance optimization */
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  .float {
+    animation: float 5s infinite ease-in-out;
+    will-change: transform; /* Performance optimization */
+  }
+  
+  /* XP Bar Animation */
+  @keyframes fillBar {
+    from { width: 0%; }
+    to { width: 100%; }
+  }
+  
+  .xp-bar-fill {
+    animation: fillBar 1.5s ease-out forwards;
+    will-change: width; /* Performance optimization */
+  }
+  
+  /* Star Rating Animation */
+  @keyframes sparkle {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  .star-sparkle {
+    animation: sparkle 1.5s infinite ease-in-out;
+    will-change: transform, opacity; /* Performance optimization */
+  }
+
+  /* Performance classes */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+  
+  /* Responsive layout helpers */
+  .responsive-container {
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  @media (min-width: 640px) {
+    .responsive-container {
+      max-width: 640px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .responsive-container {
+      max-width: 768px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .responsive-container {
+      max-width: 1024px;
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    .responsive-container {
+      max-width: 1280px;
+    }
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  padding: 2rem 0;
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
+}
+
+/* Remove alternating section backgrounds */
+section:nth-child(even) {
+  background-color: transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+  section:nth-child(even) {
+    background-color: transparent;
+  }
+}
+
+/* Enhance smooth scrolling for all browsers */
+@media screen and (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Adjust for fixed header */
+  }
+  
+  /* Define custom scroll snap behavior */
+  .snap-container {
+    scroll-snap-type: y mandatory;
+    height: 100vh;
+    overflow-y: scroll;
+  }
+  
+  .snap-section {
+    scroll-snap-align: start;
+    min-height: 100vh;
+  }
+}
+
+/* Media query for users who prefer reduced motion */
+@media screen and (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Optimize for touch devices */
+@media (hover: none) {
+  /* Simplify animations on touch devices */
+  .pulse-glow, .float, .twinkle-text {
+    animation-duration: 0s;
+  }
+}
+
+/* Mobile device optimizations */
+@media screen and (max-width: 768px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+  
+  .mobile-padding {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Optimize scrolling on mobile */
+  .mobile-scroll-container {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Tablet optimizations */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .tablet-padding {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Add smooth transitions for theme changes */
+body, section, div {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Image rendering optimizations */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Lazy loading class helper */
+.lazy-load {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lazy-load.loaded {
+  opacity: 1;
+}
+
+/* Optimize for printing */
+@media print {
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  a, a:visited {
+    text-decoration: underline;
+  }
+  
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  
+  pre, blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  
+  thead {
+    display: table-header-group;
+  }
+  
+  tr, img {
+    page-break-inside: avoid;
+  }
+  
+  img {
+    max-width: 100% !important;
+  }
+  
+  @page {
+    margin: 0.5cm;
+  }
+  
+  p, h2, h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  
+  h2, h3 {
+    page-break-after: avoid;
+  }
+}
+
+/* Smooth section transitions */
+section {
+  transition: background-color 0.3s ease;
+}
+
+/* Remove default margin in some elements */
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: transparent;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

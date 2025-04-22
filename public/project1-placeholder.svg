@@ -1,0 +1,8 @@
+<svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="400" fill="#3B82F6"/>
+  <rect x="100" y="100" width="400" height="200" rx="10" fill="#FFFFFF"/>
+  <rect x="150" y="150" width="300" height="30" fill="#E5E7EB"/>
+  <rect x="150" y="200" width="300" height="15" fill="#E5E7EB"/>
+  <rect x="150" y="230" width="200" height="15" fill="#E5E7EB"/>
+  <text x="300" y="320" text-anchor="middle" fill="#FFFFFF" font-family="Arial" font-size="24">E-COMMERCE PROJECT</text>
+</svg> 
