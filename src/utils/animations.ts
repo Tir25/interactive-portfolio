@@ -75,7 +75,7 @@ export const cardHover: Variants = {
   initial: { scale: 1 },
   hover: { 
     scale: 1.03, 
-    boxShadow: "0 5px 20px rgba(0, 110, 255, 0.2)",
+    boxShadow: "0 5px 20px var(--hover-shadow, rgba(0, 110, 255, 0.2))",
     transition: { 
       type: 'spring', 
       stiffness: 300, 
@@ -101,7 +101,7 @@ export const glowEffect: Variants = {
     boxShadow: "0 0 0 rgba(66, 153, 225, 0)" 
   },
   hover: { 
-    boxShadow: "0 0 20px rgba(66, 153, 225, 0.6)",
+    boxShadow: "0 0 20px var(--hover-shadow, rgba(66, 153, 225, 0.6))",
     transition: { 
       duration: 0.6,
       repeat: Infinity,
@@ -115,7 +115,7 @@ export const buttonAnimation: Variants = {
   initial: { scale: 1, boxShadow: "0 0 0 rgba(66, 153, 225, 0)" },
   hover: { 
     scale: 1.05,
-    boxShadow: "0 0 20px rgba(66, 153, 225, 0.6)",
+    boxShadow: "0 0 20px var(--hover-shadow, rgba(66, 153, 225, 0.6))",
     transition: { duration: 0.2 }
   },
   tap: { scale: 0.95 }

@@ -150,9 +150,9 @@ const ThemeToggle = () => {
         className={`p-3 mb-6 rounded-full backdrop-blur-md relative
                    ${isDark 
                      ? 'bg-gray-800/80 hover:bg-gray-700/80 shadow-[0_0_15px_rgba(144,224,239,0.5)]' 
-                     : 'bg-blue-50/80 hover:bg-blue-100/80 shadow-[0_0_15px_rgba(255,177,60,0.5)]'
+                     : 'bg-blue-100/90 hover:bg-blue-200/90 shadow-[0_0_18px_rgba(234,88,12,0.5)]'
                    } 
-                   transition-colors duration-300 hover:scale-110 active:scale-95`}
+                   transition-all duration-300 hover:scale-110 active:scale-95`}
         aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
         title={`Switch to ${isDark ? 'Day' : 'Night'} Mode`}
       >
