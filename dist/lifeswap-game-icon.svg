@@ -1,0 +1,24 @@
+<svg width="800" height="500" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#6366F1" />
+    <stop offset="100%" stop-color="#EC4899" />
+  </linearGradient>
+  <rect width="800" height="500" fill="url(#bg-gradient)" rx="15" />
+
+  <!-- Game controller icon -->
+  <g transform="translate(400, 250) scale(8)">
+    <rect x="-20" y="-10" width="40" height="20" rx="5" fill="#2D3748" />
+    <circle cx="-10" cy="0" r="5" fill="#A0AEC0" />
+    <circle cx="10" cy="0" r="5" fill="#A0AEC0" />
+    <rect x="-5" y="-5" width="10" height="10" fill="#A0AEC0" rx="2" />
+    <circle cx="-12" cy="-5" r="1.5" fill="#48BB78" />
+    <circle cx="-8" cy="-9" r="1.5" fill="#F56565" />
+    <circle cx="8" cy="-9" r="1.5" fill="#ED8936" />
+    <circle cx="12" cy="-5" r="1.5" fill="#2B6CB0" />
+  </g>
+  
+  <!-- Text -->
+  <text x="400" y="380" font-family="'Playfair Display', serif" font-size="36" font-weight="bold" text-anchor="middle" fill="white">Lifeswap Game</text>
+  <text x="400" y="420" font-family="'Inter', sans-serif" font-size="20" text-anchor="middle" fill="white">Swapping Lives, Changing Realities</text>
+</svg> 

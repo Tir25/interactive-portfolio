@@ -1,0 +1,103 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with gradient -->
+  <rect width="1200" height="630" fill="url(#grad)"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="1100" cy="100" r="50" fill="#3b82f680" filter="blur(20px)"/>
+  <circle cx="100" cy="500" r="70" fill="#6366f180" filter="blur(20px)"/>
+  
+  <!-- Decorative grid pattern -->
+  <g opacity="0.1">
+    <path d="M0 40 H1200" stroke="white" stroke-width="1"/>
+    <path d="M0 80 H1200" stroke="white" stroke-width="1"/>
+    <path d="M0 120 H1200" stroke="white" stroke-width="1"/>
+    <path d="M0 160 H1200" stroke="white" stroke-width="1"/>
+    <path d="M0 200 H1200" stroke="white" stroke-width="1"/>
+    <path d="M0 240 H1200" stroke="white" stroke-width="1"/>
+    <path d="M0 280 H1200" stroke="white" stroke-width="1"/>
+    <path d="M0 320 H1200" stroke="white" stroke-width="1"/>
+    <path d="M0 360 H1200" stroke="white" stroke-width="1"/>
+    <path d="M0 400 H1200" stroke="white" stroke-width="1"/>
+    <path d="M0 440 H1200" stroke="white" stroke-width="1"/>
+    <path d="M0 480 H1200" stroke="white" stroke-width="1"/>
+    <path d="M0 520 H1200" stroke="white" stroke-width="1"/>
+    <path d="M0 560 H1200" stroke="white" stroke-width="1"/>
+    <path d="M0 600 H1200" stroke="white" stroke-width="1"/>
+    
+    <path d="M40 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M80 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M120 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M160 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M200 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M240 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M280 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M320 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M360 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M400 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M440 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M480 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M520 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M560 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M600 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M640 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M680 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M720 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M760 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M800 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M840 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M880 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M920 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M960 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M1000 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M1040 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M1080 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M1120 0 V630" stroke="white" stroke-width="1"/>
+    <path d="M1160 0 V630" stroke="white" stroke-width="1"/>
+  </g>
+  
+  <!-- Main content container -->
+  <g>
+    <!-- Name heading with gradient -->
+    <text x="600" y="220" font-family="'Playfair Display', serif" font-size="80" font-weight="700" text-anchor="middle" fill="url(#textGrad)">TIRTH RAVAL</text>
+    
+    <!-- Subtitle -->
+    <text x="600" y="290" font-family="'Inter', sans-serif" font-size="32" font-weight="400" text-anchor="middle" fill="white">Interactive Developer Portfolio</text>
+    
+    <!-- Skills -->
+    <g>
+      <rect x="340" y="350" width="160" height="60" rx="30" fill="#3b82f620" stroke="#3b82f6" stroke-width="2"/>
+      <text x="420" y="390" font-family="'Inter', sans-serif" font-size="22" text-anchor="middle" fill="white">Android Dev</text>
+      
+      <rect x="520" y="350" width="160" height="60" rx="30" fill="#6366f120" stroke="#6366f1" stroke-width="2"/>
+      <text x="600" y="390" font-family="'Inter', sans-serif" font-size="22" text-anchor="middle" fill="white">React</text>
+      
+      <rect x="700" y="350" width="160" height="60" rx="30" fill="#a855f720" stroke="#a855f7" stroke-width="2"/>
+      <text x="780" y="390" font-family="'Inter', sans-serif" font-size="22" text-anchor="middle" fill="white">Game Dev</text>
+    </g>
+    
+    <!-- Website URL -->
+    <text x="600" y="480" font-family="'Inter', sans-serif" font-size="24" font-weight="500" text-anchor="middle" fill="white">tirthraval.com</text>
+    
+    <!-- Futuristic element -->
+    <rect x="450" y="500" width="300" height="4" rx="2" fill="url(#barGrad)"/>
+  </g>
+  
+  <!-- Definitions -->
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    
+    <linearGradient id="textGrad" x1="300" y1="220" x2="900" y2="220" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    
+    <linearGradient id="barGrad" x1="450" y1="502" x2="750" y2="502" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="50%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+  </defs>
+</svg> 
