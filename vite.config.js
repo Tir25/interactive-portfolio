@@ -5,6 +5,7 @@ import { splitVendorChunkPlugin } from 'vite';
 import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
+  base: '/interactive-portfolio/',
   plugins: [
     react(),
     splitVendorChunkPlugin(),
@@ -26,26 +27,25 @@ export default defineConfig({
     // }),
   ],
   server: {
-    open: true
+    open: true,
+    port: 3000,
   },
   build: {
-    // Generate source maps for production builds
+    outDir: 'dist',
+    assetsDir: 'assets',
     sourcemap: false,
-    
-    // Reduce chunk size
     chunkSizeWarningLimit: 1000,
-    
-    // Optimize build settings
     rollupOptions: {
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],
           'framer-motion': ['framer-motion'],
         },
+        assetFileNames: 'assets/[name].[hash][extname]',
+        chunkFileNames: 'assets/[name].[hash].js',
+        entryFileNames: 'assets/[name].[hash].js',
       },
     },
-    
-    // Enable minification options
     minify: 'terser',
     terserOptions: {
       compress: {
@@ -57,8 +57,6 @@ export default defineConfig({
         dead_code: true,
       },
     },
-    
-    // Optimize assets
     assetsInlineLimit: 4096, // 4kb - small assets will be inlined to reduce HTTP requests
   },
   
