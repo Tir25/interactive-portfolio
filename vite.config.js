@@ -5,6 +5,7 @@ import { splitVendorChunkPlugin } from 'vite';
 import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
+  base: '/interactive-portfolio/',
   plugins: [
     react(),
     splitVendorChunkPlugin(),
