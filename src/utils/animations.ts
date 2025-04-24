@@ -6,7 +6,7 @@ export const fadeIn: Variants = {
   visible: { 
     opacity: 1,
     transition: { 
-      duration: 0.5,
+      duration: 0.3,
       ease: "easeOut"
     }
   }
@@ -37,27 +37,35 @@ export const slideDown: Variants = {
 };
 
 export const slideInLeft: Variants = {
-  hidden: { x: -100, opacity: 0 },
-  visible: { 
-    x: 0, 
+  hidden: { 
+    x: -20,
+    opacity: 0 
+  },
+  visible: (i: number) => ({
+    x: 0,
     opacity: 1,
-    transition: { 
-      duration: 0.6,
+    transition: {
+      delay: 0.05 * i,
+      duration: 0.3,
       ease: "easeOut"
     }
-  }
+  })
 };
 
 export const slideInRight: Variants = {
-  hidden: { x: 100, opacity: 0 },
-  visible: { 
-    x: 0, 
+  hidden: { 
+    x: 20,
+    opacity: 0 
+  },
+  visible: (i: number) => ({
+    x: 0,
     opacity: 1,
-    transition: { 
-      duration: 0.6,
+    transition: {
+      delay: 0.05 * i,
+      duration: 0.3,
       ease: "easeOut"
     }
-  }
+  })
 };
 
 export const staggerContainer: Variants = {
@@ -134,21 +142,105 @@ export const skillBarAnimation: Variants = {
   })
 };
 
-// Timeline item reveal
+// Timeline item reveal - optimized for performance and smoothness
 export const timelineReveal: Variants = {
   hidden: { 
     opacity: 0,
-    y: 20
+    y: 20,
+    scale: 0.95
   },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
+    scale: 1,
     transition: {
+      type: "spring",
+      stiffness: 50,
+      damping: 15,
+      mass: 1,
       delay: 0.1 * i,
-      duration: 0.5,
-      ease: "easeOut"
+      duration: 0.6,
+      ease: [0.25, 0.1, 0.25, 1]
     }
   })
+};
+
+// Timeline path animation
+export const timelinePath: Variants = {
+  hidden: {
+    pathLength: 0,
+    opacity: 0
+  },
+  visible: {
+    pathLength: 1,
+    opacity: 1,
+    transition: {
+      pathLength: { 
+        type: "spring",
+        duration: 1.5,
+        bounce: 0,
+        ease: "easeInOut"
+      },
+      opacity: { duration: 0.3 }
+    }
+  }
+};
+
+// Timeline marker animation
+export const timelineMarker: Variants = {
+  hidden: { 
+    scale: 0,
+    opacity: 0
+  },
+  visible: (i: number) => ({
+    scale: 1,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 60,
+      damping: 12,
+      mass: 1,
+      delay: 0.2 * i
+    }
+  }),
+  hover: {
+    scale: 1.2,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 15
+    }
+  }
+};
+
+// Timeline content animation
+export const timelineContent: Variants = {
+  hidden: { 
+    opacity: 0,
+    x: 0,
+    scale: 0.9
+  },
+  visible: (isRight: boolean) => ({
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 50,
+      damping: 15,
+      mass: 1,
+      duration: 0.5,
+      ease: [0.25, 0.1, 0.25, 1]
+    }
+  }),
+  hover: {
+    y: -5,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 15
+    }
+  }
 };
 
 // Profile image animation
