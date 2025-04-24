@@ -24,22 +24,28 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    will-change: transform, opacity; /* Performance optimization for animated headings */
+    will-change: transform, opacity;
+    color: inherit;
   }
   
   h1 {
     font-size: 2.5rem;
     line-height: 1.2;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
   }
   
   h2 {
     font-size: 2rem;
     line-height: 1.3;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.01em;
   }
   
   h3 {
     font-size: 1.75rem;
     line-height: 1.3;
+    margin-bottom: 1rem;
   }
   
   p, span, a, div, button {
@@ -64,14 +70,20 @@
   @media (max-width: 768px) {
     h1 {
       font-size: 2rem;
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
     }
     
     h2 {
       font-size: 1.75rem;
+      line-height: 1.3;
+      margin-bottom: 1rem;
     }
     
     h3 {
       font-size: 1.5rem;
+      line-height: 1.3;
+      margin-bottom: 0.875rem;
     }
     
     p {
