@@ -40,14 +40,14 @@ const Projects: React.FC = () => {
       description: 'A next-generation emergency response app designed to connect individuals in distress to emergency services and nearby community responders in real time — with a strong focus on security, privacy, and anti-abuse logic.',
       technologies: ['Kotlin', 'Android', 'Firebase', 'Google Maps API'],
       image: '/safereach-thumbnail.png',
-      link: 'https://github.com/Tir25/SafeReach-.git',
+      link: 'https://github.com/Tir25/SafeReach-',
     },
     {
       title: 'Lifeswap Game',
       description: 'An innovative game concept that allows players to experience different lives and realities, offering unique gameplay mechanics and immersive storytelling.',
       technologies: ['Unity', 'C#', 'Game Design', 'UI/UX'],
       image: '/lifeswap-game-icon.svg',
-      link: 'https://github.com/Tir25/Lifeswap-Game.git',
+      link: 'https://github.com/Tir25/Lifeswap-Game',
     },
   ];
 
