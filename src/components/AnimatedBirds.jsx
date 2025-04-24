@@ -7,9 +7,6 @@ const AnimatedBirds = () => {
   const [birds, setBirds] = useState([]);
   const [perchedBirds, setPerchedBirds] = useState([]);
 
-  // Only render in day mode
-  if (isDark) return null;
-
   useEffect(() => {
     // Generate random birds with different properties
     const generateBirds = () => {
@@ -165,6 +162,10 @@ const AnimatedBirds = () => {
       </div>
     );
   };
+
+  if (isDark) {
+    return null;
+  }
 
   return (
     <>
