@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp, socialIconAnimation, inputAnimation } from '../utils/animations';
+import emailjs from '@emailjs/browser';
 
 // Use "as any" to work around TypeScript errors with motion components
 const MotionDiv = motion.div as any;
@@ -12,12 +13,23 @@ const MotionInput = motion.input as any;
 const MotionTextarea = motion.textarea as any;
 const MotionButton = motion.button as any;
 
+// EmailJS configuration
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
 const Contact: React.FC = () => {
+  const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    success: boolean;
+    message: string;
+  } | null>(null);
 
   const [focusedInput, setFocusedInput] = useState<string | null>(null);
 
@@ -37,12 +49,37 @@ const Contact: React.FC = () => {
     setFocusedInput(null);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Here you would typically send the form data to your backend
-    alert('Thanks for your message! I\'ll get back to you soon.');
-    setFormData({ name: '', email: '', message: '' });
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const result = await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current as HTMLFormElement,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      if (result.text === 'OK') {
+        setSubmitStatus({
+          success: true,
+          message: 'Message sent successfully! I\'ll get back to you soon.'
+        });
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setSubmitStatus({
+        success: false,
+        message: 'Failed to send message. Please try again later or contact me directly at tirthraval27@gmail.com'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -55,13 +92,13 @@ const Contact: React.FC = () => {
         variants={fadeIn}
       >
         <MotionH2 
-          className="text-4xl font-bold mb-8 text-center text-white font-playfair"
+          className="text-4xl font-bold mb-8 text-center font-playfair"
           variants={slideUp}
         >
           Get In Touch
         </MotionH2>
         <MotionP 
-          className="text-center mb-12 max-w-lg mx-auto backdrop-blur-sm text-gray-200 font-inter"
+          className="text-center mb-12 max-w-lg mx-auto backdrop-blur-sm font-inter"
           variants={slideUp}
         >
           Have a question or want to work together? Feel free to reach out!
@@ -85,8 +122,8 @@ const Contact: React.FC = () => {
                 </svg>
                 <MotionA 
                   href="mailto:tirthraval27@gmail.com" 
-                  className="hover:underline text-blue-300 font-inter"
-                  whileHover={{ color: '#93c5fd', scale: 1.02 }}
+                  className="hover:underline font-inter"
+                  whileHover={{ scale: 1.02 }}
                 >
                   tirthraval27@gmail.com
                 </MotionA>
@@ -146,13 +183,25 @@ const Contact: React.FC = () => {
           </MotionDiv>
           
           <MotionForm
+            ref={formRef}
             onSubmit={handleSubmit} 
             className="bg-white/10 dark:bg-gray-800/10 p-6 rounded-lg shadow-md backdrop-blur-sm"
             variants={slideUp}
             custom={2}
           >
+            {submitStatus && (
+              <MotionDiv 
+                className={`mb-4 p-3 rounded-md ${submitStatus.success ? 'bg-green-500/20 text-green-300' : 'bg-red-500/20 text-red-300'}`}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {submitStatus.message}
+              </MotionDiv>
+            )}
+            
             <div className="mb-4">
-              <label htmlFor="name" className="block text-sm font-medium mb-2 text-white font-inter">Name</label>
+              <label htmlFor="name" className="block text-sm font-medium mb-2 font-inter">Name</label>
               <MotionInput
                 type="text"
                 id="name"
@@ -161,14 +210,14 @@ const Contact: React.FC = () => {
                 onChange={handleChange}
                 onFocus={() => handleFocus('name')}
                 onBlur={handleBlur}
-                className="w-full px-3 py-2 border border-gray-300/30 dark:border-gray-600/30 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800/30 bg-white/10 text-white font-inter"
+                className="w-full px-3 py-2 border border-gray-300/30 dark:border-gray-600/30 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800/30 bg-white/10 font-inter"
                 required
                 animate={focusedInput === 'name' ? 'focus' : 'initial'}
                 variants={inputAnimation}
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-medium mb-2 text-white font-inter">Email</label>
+              <label htmlFor="email" className="block text-sm font-medium mb-2 font-inter">Email</label>
               <MotionInput
                 type="email"
                 id="email"
@@ -177,14 +226,14 @@ const Contact: React.FC = () => {
                 onChange={handleChange}
                 onFocus={() => handleFocus('email')}
                 onBlur={handleBlur}
-                className="w-full px-3 py-2 border border-gray-300/30 dark:border-gray-600/30 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800/30 bg-white/10 text-white font-inter"
+                className="w-full px-3 py-2 border border-gray-300/30 dark:border-gray-600/30 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800/30 bg-white/10 font-inter"
                 required
                 animate={focusedInput === 'email' ? 'focus' : 'initial'}
                 variants={inputAnimation}
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="message" className="block text-sm font-medium mb-2 text-white font-inter">Message</label>
+              <label htmlFor="message" className="block text-sm font-medium mb-2 font-inter">Message</label>
               <MotionTextarea
                 id="message"
                 name="message"
@@ -193,7 +242,7 @@ const Contact: React.FC = () => {
                 onFocus={() => handleFocus('message')}
                 onBlur={handleBlur}
                 rows={5}
-                className="w-full px-3 py-2 border border-gray-300/30 dark:border-gray-600/30 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800/30 bg-white/10 text-white font-inter"
+                className="w-full px-3 py-2 border border-gray-300/30 dark:border-gray-600/30 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800/30 bg-white/10 font-inter"
                 required
                 animate={focusedInput === 'message' ? 'focus' : 'initial'}
                 variants={inputAnimation}
@@ -204,8 +253,9 @@ const Contact: React.FC = () => {
               className="w-full bg-blue-600/80 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 font-inter"
               whileHover={{ scale: 1.02, backgroundColor: 'rgba(37, 99, 235, 0.9)' }}
               whileTap={{ scale: 0.98 }}
+              disabled={isSubmitting}
             >
-              Send Message
+              {isSubmitting ? 'Sending...' : 'Send Message'}
             </MotionButton>
           </MotionForm>
         </div>
