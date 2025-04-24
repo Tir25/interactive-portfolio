@@ -23,3 +23,15 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data:; img-src 'self' data: https:; connect-src 'self' https:;" 
+
+# Add specific headers for JavaScript files
+[[headers]]
+  for = "/assets/*.js"
+  [headers.values]
+    Content-Type = "application/javascript"
+
+# Add specific headers for CSS files
+[[headers]]
+  for = "/assets/*.css"
+  [headers.values]
+    Content-Type = "text/css" 
