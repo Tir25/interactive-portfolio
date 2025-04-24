@@ -38,30 +38,39 @@ export const ThemeProvider = ({ children }) => {
   // Set the actual theme
   const applyTheme = (newTheme) => {
     if (typeof document !== 'undefined') {
-      document.documentElement.setAttribute('data-theme', newTheme);
+      // Apply theme classes before changing the attribute to prevent flash
       if (newTheme === THEMES.DARK) {
         document.documentElement.classList.add('dark');
       } else {
         document.documentElement.classList.remove('dark');
       }
+      
+      // Set the data-theme attribute after classes are applied
+      document.documentElement.setAttribute('data-theme', newTheme);
     }
   };
 
   // Toggle theme manually with animation support
   const toggleTheme = () => {
+    // Don't allow multiple toggles while transitioning
+    if (isTransitioning) return;
+    
     setIsTransitioning(true);
     
     // Simply toggle between light and dark
     const newTheme = theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
     
-    // Small delay for smoother animation
+    // Apply theme immediately to prevent blank screen
+    applyTheme(newTheme);
+    
+    // Update state and localStorage with a small delay for smoother animation
     setTimeout(() => {
       setTheme(newTheme);
       if (typeof localStorage !== 'undefined') {
         localStorage.setItem('theme', newTheme);
       }
       setIsTransitioning(false);
-    }, 50);
+    }, 300); // Increased delay for smoother transition
   };
 
   // Apply theme changes whenever theme state changes

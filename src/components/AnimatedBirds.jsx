@@ -8,6 +8,9 @@ const AnimatedBirds = () => {
   const [perchedBirds, setPerchedBirds] = useState([]);
 
   useEffect(() => {
+    // Only generate birds in day mode
+    if (isDark) return;
+    
     // Generate random birds with different properties
     const generateBirds = () => {
       const birdColors = ['bird-blue', 'bird-red', 'bird-yellow', 'bird-green', 'bird-purple'];
@@ -89,7 +92,10 @@ const AnimatedBirds = () => {
     const interval = setInterval(generateBirds, 45000);
     
     return () => clearInterval(interval);
-  }, []);
+  }, [isDark]); // Add isDark as a dependency
+
+  // Only render in day mode
+  if (isDark) return null;
 
   const renderBird = (bird) => {
     const baseStyles = {
@@ -163,10 +169,6 @@ const AnimatedBirds = () => {
     );
   };
 
-  if (isDark) {
-    return null;
-  }
-
   return (
     <>
       <style>
@@ -189,91 +191,6 @@ const AnimatedBirds = () => {
           .bird-perched {
             transform-origin: bottom center;
           }
-
-          .bird {
-            position: absolute;
-            width: 20px;
-            height: 10px;
-          }
-
-          .bird-body {
-            position: absolute;
-            width: 12px;
-            height: 6px;
-            background: currentColor;
-            border-radius: 50%;
-            top: 2px;
-            left: 4px;
-          }
-
-          .bird-head {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: currentColor;
-            border-radius: 50%;
-            top: 1px;
-            left: 14px;
-          }
-
-          .bird-eye {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            top: 2px;
-            left: 17px;
-          }
-
-          .bird-beak {
-            position: absolute;
-            width: 4px;
-            height: 2px;
-            background: #ff6b6b;
-            border-radius: 1px;
-            top: 4px;
-            left: 18px;
-          }
-
-          .bird-wing {
-            position: absolute;
-            width: 8px;
-            height: 4px;
-            background: currentColor;
-            border-radius: 50%;
-            top: 0;
-            left: 6px;
-          }
-
-          .bird-tail {
-            position: absolute;
-            width: 6px;
-            height: 3px;
-            background: currentColor;
-            border-radius: 50%;
-            top: 3px;
-            left: 0;
-          }
-
-          .wing-slow { animation: flap-wings 1s infinite; }
-          .wing-medium { animation: flap-wings 0.7s infinite; }
-          .wing-fast { animation: flap-wings 0.4s infinite; }
-
-          @keyframes flap-wings {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(30deg); }
-          }
-
-          .bird-small { transform: scale(0.7); }
-          .bird-medium { transform: scale(1); }
-          .bird-large { transform: scale(1.3); }
-
-          .bird-blue { color: #3b82f6; }
-          .bird-red { color: #ef4444; }
-          .bird-yellow { color: #eab308; }
-          .bird-green { color: #22c55e; }
-          .bird-purple { color: #a855f7; }
         `}
       </style>
       <div className="birds-container">

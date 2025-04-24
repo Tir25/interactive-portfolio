@@ -1,0 +1,78 @@
+/* Card and Component Styles */
+.card {
+  @apply bg-white dark:bg-gray-800 rounded-lg p-6 transition-all duration-300;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Enhanced scrollbar for day mode */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Section transitions */
+section {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced focus states for accessibility */
+:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Smooth hover effects for interactive elements */
+button, a {
+  @apply transition-all duration-200;
+}
+
+button:hover, a:hover {
+  @apply transform scale-105;
+}
+
+/* Glass morphism effect for overlays */
+.glass {
+  @apply backdrop-blur-md bg-white/30 dark:bg-gray-800/30;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive container padding */
+.container {
+  @apply px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl;
+}
+
+/* Enhanced text selection */
+::selection {
+  @apply bg-blue-500/20 text-blue-900 dark:text-blue-100;
+} 

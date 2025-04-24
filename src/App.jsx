@@ -9,6 +9,9 @@ import Skills from './components/Skills';
 import Timeline from './components/Timeline';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
+import AnimatedTree from './components/AnimatedTree';
+import AnimatedBirds from './components/AnimatedBirds';
+import './App.css';
 
 const App = () => {
   return (
@@ -16,6 +19,8 @@ const App = () => {
       <div className="min-h-screen font-sans relative">
         <ThemeBackground />
         <ThemeToggle />
+        <AnimatedTree />
+        <AnimatedBirds />
         <div className="relative z-10">
           <Navbar />
           <main>

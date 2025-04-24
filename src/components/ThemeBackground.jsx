@@ -1,8 +1,6 @@
 import React, { useMemo } from 'react';
 // import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
-import TreeAnimation from './TreeAnimation';
-import AnimatedBirds from './AnimatedBirds';
 
 const ThemeBackground = () => {
   const { theme, THEMES } = useTheme();
@@ -128,8 +126,8 @@ const ThemeBackground = () => {
         left: direction === 'right' ? '-20%' : '120%',
         width: `${size}px`,
         height: `${size * 0.3}px`,
-        duration: 60 + Math.random() * 80, // Slightly faster speeds (60-140s)
-        delay: baseDelay + Math.random() * 30, // Shorter delays
+        duration: 30 + Math.random() * 20, // Much faster speeds (30-50s)
+        delay: baseDelay + Math.random() * 15, // Shorter delays
         direction,
         opacity: opacityRange.min + Math.random() * (opacityRange.max - opacityRange.min)
       };
@@ -138,30 +136,30 @@ const ThemeBackground = () => {
     // Create three layers of clouds at different heights
     
     // Lower clouds - larger, slower, more opaque
-    const lowerClouds = Array.from({ length: 10 }, (_, i) => 
+    const lowerClouds = Array.from({ length: 8 }, (_, i) => 
       createCloud(i + 1, { min: 40, max: 60 }, { min: 150, max: 220 }, null, { min: 0.85, max: 0.95 })
     );
     
     // Middle clouds - medium size and opacity
-    const middleClouds = Array.from({ length: 14 }, (_, i) => 
-      createCloud(i + 20, { min: 25, max: 45 }, { min: 100, max: 180 }, null, { min: 0.7, max: 0.9 }, 10)
+    const middleClouds = Array.from({ length: 12 }, (_, i) => 
+      createCloud(i + 20, { min: 25, max: 45 }, { min: 100, max: 180 }, null, { min: 0.7, max: 0.9 }, 5)
     );
     
     // Higher clouds - smaller, faster, more transparent
-    const higherClouds = Array.from({ length: 12 }, (_, i) => 
-      createCloud(i + 40, { min: 5, max: 30 }, { min: 80, max: 150 }, null, { min: 0.5, max: 0.8 }, 20)
+    const higherClouds = Array.from({ length: 10 }, (_, i) => 
+      createCloud(i + 40, { min: 5, max: 30 }, { min: 80, max: 150 }, null, { min: 0.5, max: 0.8 }, 10)
     );
     
-    // Add a few slow-moving clouds for consistency
-    const slowClouds = [
+    // Add a few medium-speed clouds for variety
+    const mediumClouds = [
       {
         id: 100,
         top: '15%',
         left: '20%',
         width: '180px',
         height: '50px',
-        duration: 190, // Very slow movement
-        delay: 5,
+        duration: 45, // Medium speed
+        delay: 2,
         direction: 'right',
         opacity: 0.8
       },
@@ -171,8 +169,8 @@ const ThemeBackground = () => {
         left: '70%',
         width: '200px',
         height: '60px',
-        duration: 210, // Very slow movement
-        delay: 15,
+        duration: 40, // Medium speed
+        delay: 8,
         direction: 'left',
         opacity: 0.9
       },
@@ -182,36 +180,14 @@ const ThemeBackground = () => {
         left: '45%',
         width: '160px',
         height: '45px',
-        duration: 180, // Very slow movement
-        delay: 10,
+        duration: 50, // Medium speed
+        delay: 5,
         direction: 'right',
         opacity: 0.75
-      },
-      {
-        id: 103,
-        top: '50%',
-        left: '30%',
-        width: '190px',
-        height: '55px',
-        duration: 220, // Very slow movement
-        delay: 8,
-        direction: 'left',
-        opacity: 0.85
-      },
-      {
-        id: 104,
-        top: '20%',
-        left: '60%',
-        width: '170px',
-        height: '48px',
-        duration: 200, // Very slow movement
-        delay: 20,
-        direction: 'right',
-        opacity: 0.8
       }
     ];
     
-    return [...lowerClouds, ...middleClouds, ...higherClouds, ...slowClouds];
+    return [...lowerClouds, ...middleClouds, ...higherClouds, ...mediumClouds];
   }, []);
 
   // Simple SVG for birds in light mode
@@ -258,7 +234,12 @@ const ThemeBackground = () => {
   
   // Cloud component
   const Cloud = ({ top, left, width, height, duration, delay, direction, opacity }) => {
-    const animationStyle = { animation: `cloud-drift-${direction} ${duration}s linear ${delay}s infinite` };
+    const animationStyle = { 
+      animation: `cloud-drift-${direction} ${duration}s linear ${delay}s infinite`,
+      willChange: 'transform',
+      backfaceVisibility: 'hidden',
+      transform: 'translateZ(0)'
+    };
       
     return (
       <div
@@ -352,7 +333,8 @@ const ThemeBackground = () => {
         </div>
       ) : (
         <div className="w-full h-full relative overflow-hidden">
-          {/* Clouds */}
+          {/* Clouds container */}
+          <div className="clouds-container">
           {clouds.map(cloud => (
             <Cloud 
               key={`cloud-${cloud.id}`}
@@ -366,6 +348,7 @@ const ThemeBackground = () => {
               opacity={cloud.opacity}
             />
           ))}
+          </div>
           
           {/* Sun with enhanced effects */}
           <div className="absolute top-[15%] right-[15%] w-24 h-24">
@@ -398,12 +381,16 @@ const ThemeBackground = () => {
               }}
             />
           </div>
-
-          {/* Tree Animation */}
-          <TreeAnimation />
-
-          {/* Bird Animation */}
-          <AnimatedBirds />
+          
+          {/* Birds - limited to 3 for simplicity */}
+          {[...Array(3)].map((_, i) => (
+            <Bird 
+              key={`bird-${i}`}
+              x={10 + (i * 15)}
+              y={10 + (i * 10)}
+              size={6 + (i * 2)}
+            />
+          ))}
         </div>
       )}
     </div>

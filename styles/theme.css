@@ -3,15 +3,20 @@
 @tailwind utilities;
 
 :root {
-  /* Light mode (default) */
+  /* Light mode (default) - Enhanced contrast */
   --background: #ffffff;
-  --text: #333333;
-  --primary: #3b82f6;
-  --secondary: #6b7280;
-  --accent: #2563eb;
-  --card-bg: #f9fafb;
-  --border: #e5e7eb;
-  --day-sky: #87ceeb; /* Soft sky blue for day mode */
+  --text: #1a1a1a;             /* Darker text color for better readability */
+  --primary: #1a56db;          /* Darker blue for primary elements */
+  --secondary: #4b5563;        /* Darker secondary text */
+  --accent: #1e40af;           /* Deeper accent color */
+  --card-bg: #f3f4f6;          /* Slightly darker card background */
+  --border: #d1d5db;           /* Darker border for better definition */
+  --day-sky: #87ceeb;          /* Soft sky blue for day mode - keeping as requested */
+  --hover-shadow: rgba(30, 64, 175, 0.3); /* Shadow for hover effects */
+  --text-soft: #374151;        /* Softer text for less important content */
+  --link-hover: #1e40af;       /* Link hover state */
+  --card-shadow: rgba(0, 0, 0, 0.05);  /* Light shadow for cards */
+  --focus-ring: rgba(59, 130, 246, 0.5); /* Focus ring color */
 }
 
 /* Dark mode */
@@ -33,18 +38,113 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Section-specific text colors for day mode */
+:root:not([data-theme="dark"]) #about,
+:root:not([data-theme="dark"]) #skills,
+:root:not([data-theme="dark"]) #timeline,
+:root:not([data-theme="dark"]) #projects,
+:root:not([data-theme="dark"]) #contact {
+  color: #000000;
+}
+
+:root:not([data-theme="dark"]) #about h2,
+:root:not([data-theme="dark"]) #skills h2,
+:root:not([data-theme="dark"]) #timeline h2,
+:root:not([data-theme="dark"]) #projects h2,
+:root:not([data-theme="dark"]) #contact h2 {
+  color: #000000;
+}
+
+:root:not([data-theme="dark"]) #about p,
+:root:not([data-theme="dark"]) #skills p,
+:root:not([data-theme="dark"]) #timeline p,
+:root:not([data-theme="dark"]) #projects p,
+:root:not([data-theme="dark"]) #contact p {
+  color: #000000;
+}
+
+:root:not([data-theme="dark"]) #about .text-gray-300,
+:root:not([data-theme="dark"]) #skills .text-gray-300,
+:root:not([data-theme="dark"]) #timeline .text-gray-300,
+:root:not([data-theme="dark"]) #projects .text-gray-300,
+:root:not([data-theme="dark"]) #contact .text-gray-300 {
+  color: #000000;
+}
+
 .card {
   background-color: var(--card-bg);
   border: 1px solid var(--border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px var(--card-shadow);
+}
+
+/* Enhanced card hover for light mode */
+:root:not([data-theme="dark"]) .card:hover {
+  box-shadow: 0 5px 15px var(--hover-shadow);
+  transform: translateY(-2px);
+  border-color: var(--primary);
 }
 
 a {
   color: var(--primary);
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+/* Enhanced link hover for light mode */
+:root:not([data-theme="dark"]) a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
 }
 
 button.primary {
   background-color: var(--primary);
   color: var(--background);
+  transition: all 0.2s ease;
+}
+
+/* Enhanced button hover for light mode */
+:root:not([data-theme="dark"]) button.primary:hover {
+  background-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px var(--hover-shadow);
+}
+
+/* Additional day mode enhancements for form elements */
+:root:not([data-theme="dark"]) input:focus,
+:root:not([data-theme="dark"]) select:focus,
+:root:not([data-theme="dark"]) textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+  outline: none;
+}
+
+/* Better visibility for code blocks and pre elements in day mode */
+:root:not([data-theme="dark"]) pre,
+:root:not([data-theme="dark"]) code {
+  background-color: #e5e7eb;
+  color: #1e293b;
+  border: 1px solid #d1d5db;
+}
+
+/* Enhance table visibility in day mode */
+:root:not([data-theme="dark"]) table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid var(--border);
+}
+
+:root:not([data-theme="dark"]) th {
+  background-color: #e5e7eb;
+  color: var(--text);
+  font-weight: 600;
+}
+
+:root:not([data-theme="dark"]) td,
+:root:not([data-theme="dark"]) th {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
 }
 
 /* Star animations */
@@ -272,6 +372,9 @@ button.primary {
   position: absolute;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 50px;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .cloud::before,
@@ -280,6 +383,9 @@ button.primary {
   position: absolute;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 50%;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .cloud::before {
@@ -294,4 +400,971 @@ button.primary {
   height: 120%;
   top: -30%;
   right: 15%;
+}
+
+/* Cloud container to prevent overflow */
+.clouds-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Enhanced card styling for day mode */
+:root:not([data-theme="dark"]) .card {
+  background-color: rgba(243, 244, 246, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced card hover for day mode */
+:root:not([data-theme="dark"]) .card:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 10px 15px -3px rgba(0, 0, 0, 0.08),
+    0 4px 6px -2px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(59, 130, 246, 0.1) inset;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Consistent rounded corners for day mode components */
+:root:not([data-theme="dark"]) button,
+:root:not([data-theme="dark"]) input,
+:root:not([data-theme="dark"]) select,
+:root:not([data-theme="dark"]) textarea {
+  border-radius: 0.75rem;
+}
+
+/* Enhanced button styling for day mode */
+:root:not([data-theme="dark"]) button.primary {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced button hover for day mode */
+:root:not([data-theme="dark"]) button.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+/* Enhanced input focus for day mode */
+:root:not([data-theme="dark"]) input:focus,
+:root:not([data-theme="dark"]) select:focus,
+:root:not([data-theme="dark"]) textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 
+    0 0 0 3px rgba(59, 130, 246, 0.2),
+    0 0 0 1px rgba(59, 130, 246, 0.1) inset;
+  outline: none;
+}
+
+/* Enhanced link styling for day mode */
+:root:not([data-theme="dark"]) a {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+:root:not([data-theme="dark"]) a:hover {
+  color: var(--accent);
+}
+
+:root:not([data-theme="dark"]) a::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--accent);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+:root:not([data-theme="dark"]) a:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Day mode background patterns */
+:root:not([data-theme="dark"]) body {
+  background-image: 
+    radial-gradient(circle at 100% 100%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.1) 75%, rgba(255, 255, 255, 0.1)),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.1) 75%, rgba(255, 255, 255, 0.1));
+  background-size: 100% 100%, 100% 100%, 60px 60px, 60px 60px;
+  background-position: 0 0, 0 0, 0 0, 30px 30px;
+}
+
+/* Section dividers with gradients for day mode */
+:root:not([data-theme="dark"]) section {
+  position: relative;
+  padding: 4rem 0;
+}
+
+:root:not([data-theme="dark"]) section:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(59, 130, 246, 0.2) 25%, 
+    rgba(59, 130, 246, 0.3) 50%, 
+    rgba(59, 130, 246, 0.2) 75%, 
+    transparent 100%
+  );
+}
+
+:root:not([data-theme="dark"]) section:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(59, 130, 246, 0.2) 25%, 
+    rgba(59, 130, 246, 0.3) 50%, 
+    rgba(59, 130, 246, 0.2) 75%, 
+    transparent 100%
+  );
+}
+
+/* Consistent icon styling for day mode */
+:root:not([data-theme="dark"]) .icon {
+  color: var(--primary);
+  transition: all 0.3s ease;
+}
+
+:root:not([data-theme="dark"]) .icon:hover {
+  color: var(--accent);
+  transform: scale(1.1);
+}
+
+:root:not([data-theme="dark"]) .icon-primary {
+  color: var(--primary);
+}
+
+:root:not([data-theme="dark"]) .icon-secondary {
+  color: var(--secondary);
+}
+
+:root:not([data-theme="dark"]) .icon-accent {
+  color: var(--accent);
+}
+
+/* Visual cues for interactive elements in day mode */
+:root:not([data-theme="dark"]) [role="button"],
+:root:not([data-theme="dark"]) button,
+:root:not([data-theme="dark"]) a {
+  position: relative;
+}
+
+:root:not([data-theme="dark"]) [role="button"]::before,
+:root:not([data-theme="dark"]) button::before,
+:root:not([data-theme="dark"]) a::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+:root:not([data-theme="dark"]) [role="button"]:hover::before,
+:root:not([data-theme="dark"]) button:hover::before,
+:root:not([data-theme="dark"]) a:hover::before {
+  opacity: 1;
+}
+
+/* Interactive element focus indicators for day mode */
+:root:not([data-theme="dark"]) [role="button"]:focus-visible,
+:root:not([data-theme="dark"]) button:focus-visible,
+:root:not([data-theme="dark"]) a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Section headers with visual emphasis for day mode */
+:root:not([data-theme="dark"]) h2 {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+:root:not([data-theme="dark"]) h2::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    var(--primary) 0%, 
+    var(--accent) 100%
+  );
+  border-radius: 1px;
+}
+
+/* Card headers with visual emphasis for day mode */
+:root:not([data-theme="dark"]) .card h3 {
+  color: var(--primary);
+  position: relative;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+:root:not([data-theme="dark"]) .card h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 3rem;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    var(--primary) 0%, 
+    transparent 100%
+  );
+  border-radius: 1px;
+}
+
+/* Visual indicator for scrollable content in day mode */
+:root:not([data-theme="dark"]) .scrollable {
+  position: relative;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
+}
+
+:root:not([data-theme="dark"]) .scrollable::-webkit-scrollbar {
+  width: 6px;
+}
+
+:root:not([data-theme="dark"]) .scrollable::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+:root:not([data-theme="dark"]) .scrollable::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 3px;
+}
+
+/* Visual indicator for loading states in day mode */
+:root:not([data-theme="dark"]) .loading {
+  position: relative;
+  overflow: hidden;
+}
+
+:root:not([data-theme="dark"]) .loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Enhanced Navigation Bar for Day Mode */
+:root:not([data-theme="dark"]) nav {
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+}
+
+:root:not([data-theme="dark"]) nav.glass-effect {
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    0 10px 15px -3px rgba(0, 0, 0, 0.08),
+    0 4px 6px -2px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+/* Navigation text for day mode */
+:root:not([data-theme="dark"]) nav a {
+  color: #1a1a1a;
+  font-weight: 500;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Navigation buttons for day mode */
+:root:not([data-theme="dark"]) nav a.rounded-full {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced hover effect for navigation buttons in day mode */
+:root:not([data-theme="dark"]) nav a.rounded-full:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(59, 130, 246, 0.2) inset;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Active navigation item for day mode */
+:root:not([data-theme="dark"]) nav a.blue-glow {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: var(--primary);
+  font-weight: 600;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(59, 130, 246, 0.2) inset;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Mobile menu button for day mode */
+:root:not([data-theme="dark"]) nav button.rounded-full {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:root:not([data-theme="dark"]) nav button.rounded-full:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(59, 130, 246, 0.2) inset;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Navigation decorative elements for day mode */
+:root:not([data-theme="dark"]) nav .bg-gradient-to-r {
+  background-image: linear-gradient(to right, 
+    transparent 0%, 
+    rgba(59, 130, 246, 0.3) 50%, 
+    transparent 100%
+  );
+}
+
+:root:not([data-theme="dark"]) nav .bg-gradient-to-br {
+  background-image: linear-gradient(to bottom right, 
+    rgba(59, 130, 246, 0.2) 0%, 
+    transparent 100%
+  );
+}
+
+:root:not([data-theme="dark"]) nav .bg-gradient-to-bl {
+  background-image: linear-gradient(to bottom left, 
+    rgba(59, 130, 246, 0.2) 0%, 
+    transparent 100%
+  );
+}
+
+/* Navigation glowing dots for day mode */
+:root:not([data-theme="dark"]) nav .bg-blue-500 {
+  background-color: var(--primary);
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+}
+
+:root:not([data-theme="dark"]) nav .bg-purple-500 {
+  background-color: var(--accent);
+  box-shadow: 0 0 8px rgba(30, 64, 175, 0.6);
+}
+
+/* Logo styling for day mode */
+:root:not([data-theme="dark"]) nav .logo {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Animated Tree for Day Mode */
+:root:not([data-theme="dark"]) .animated-tree {
+  position: fixed;
+  bottom: 0;
+  right: 5%;
+  width: 200px;
+  height: 300px;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+/* Tree trunk */
+:root:not([data-theme="dark"]) .tree-trunk {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 120px;
+  background: linear-gradient(to bottom, #8B4513, #654321);
+  border-radius: 5px 5px 0 0;
+}
+
+/* Tree branches */
+:root:not([data-theme="dark"]) .tree-branch {
+  position: absolute;
+  background: linear-gradient(to bottom, #8B4513, #654321);
+  border-radius: 5px;
+}
+
+:root:not([data-theme="dark"]) .branch-1 {
+  width: 80px;
+  height: 15px;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-30deg);
+}
+
+:root:not([data-theme="dark"]) .branch-2 {
+  width: 60px;
+  height: 12px;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%) rotate(30deg);
+}
+
+:root:not([data-theme="dark"]) .branch-3 {
+  width: 70px;
+  height: 14px;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-20deg);
+}
+
+:root:not([data-theme="dark"]) .branch-4 {
+  width: 50px;
+  height: 10px;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%) rotate(25deg);
+}
+
+/* Tree foliage */
+:root:not([data-theme="dark"]) .tree-foliage {
+  position: absolute;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 180px;
+  background: radial-gradient(ellipse at center, #4CAF50, #2E7D32);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: 
+    inset -10px -10px 20px rgba(0, 0, 0, 0.2),
+    inset 10px 10px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Falling leaves */
+:root:not([data-theme="dark"]) .leaf {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: linear-gradient(135deg, #81C784, #4CAF50);
+  border-radius: 50% 0 50% 50%;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  opacity: 0.8;
+  z-index: 5;
+}
+
+/* Leaf animation keyframes */
+@keyframes leaf-fall-1 {
+  0% {
+    transform: translate(0, -50px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(100px, 300px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes leaf-fall-2 {
+  0% {
+    transform: translate(0, -50px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-120px, 250px) rotate(-360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes leaf-fall-3 {
+  0% {
+    transform: translate(0, -50px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(80px, 280px) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+/* Leaf positions and animations */
+:root:not([data-theme="dark"]) .leaf-1 {
+  top: 30%;
+  left: 50%;
+  animation: leaf-fall-1 8s linear infinite;
+  animation-delay: 0s;
+}
+
+:root:not([data-theme="dark"]) .leaf-2 {
+  top: 40%;
+  left: 60%;
+  animation: leaf-fall-2 10s linear infinite;
+  animation-delay: 1s;
+}
+
+:root:not([data-theme="dark"]) .leaf-3 {
+  top: 25%;
+  left: 40%;
+  animation: leaf-fall-3 9s linear infinite;
+  animation-delay: 2s;
+}
+
+:root:not([data-theme="dark"]) .leaf-4 {
+  top: 35%;
+  left: 55%;
+  animation: leaf-fall-1 11s linear infinite;
+  animation-delay: 3s;
+}
+
+:root:not([data-theme="dark"]) .leaf-5 {
+  top: 45%;
+  left: 45%;
+  animation: leaf-fall-2 7s linear infinite;
+  animation-delay: 4s;
+}
+
+:root:not([data-theme="dark"]) .leaf-6 {
+  top: 20%;
+  left: 50%;
+  animation: leaf-fall-3 9.5s linear infinite;
+  animation-delay: 5s;
+}
+
+:root:not([data-theme="dark"]) .leaf-7 {
+  top: 30%;
+  left: 65%;
+  animation: leaf-fall-1 10.5s linear infinite;
+  animation-delay: 6s;
+}
+
+:root:not([data-theme="dark"]) .leaf-8 {
+  top: 40%;
+  left: 35%;
+  animation: leaf-fall-2 8.5s linear infinite;
+  animation-delay: 7s;
+}
+
+/* Wind effect for tree */
+@keyframes tree-sway {
+  0% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-50%) rotate(1deg);
+  }
+  75% {
+    transform: translateX(-50%) rotate(-1deg);
+  }
+  100% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+}
+
+:root:not([data-theme="dark"]) .tree-foliage {
+  animation: tree-sway 8s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+/* Animated Birds for Day Mode */
+:root:not([data-theme="dark"]) .birds-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+/* Bird base styling */
+:root:not([data-theme="dark"]) .bird {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 5;
+}
+
+/* Bird body */
+:root:not([data-theme="dark"]) .bird-body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background-color: currentColor;
+}
+
+/* Bird head */
+:root:not([data-theme="dark"]) .bird-head {
+  position: absolute;
+  width: 30%;
+  height: 60%;
+  top: 20%;
+  right: -5%;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background-color: currentColor;
+}
+
+/* Bird eye */
+:root:not([data-theme="dark"]) .bird-eye {
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  top: 30%;
+  right: 10%;
+  border-radius: 50%;
+  background-color: #000;
+}
+
+/* Bird beak */
+:root:not([data-theme="dark"]) .bird-beak {
+  position: absolute;
+  width: 15%;
+  height: 10%;
+  top: 45%;
+  right: -10%;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background-color: #FF9800;
+}
+
+/* Bird wings */
+:root:not([data-theme="dark"]) .bird-wing {
+  position: absolute;
+  width: 40%;
+  height: 30%;
+  top: 35%;
+  left: 10%;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background-color: currentColor;
+  transform-origin: right center;
+}
+
+/* Bird tail */
+:root:not([data-theme="dark"]) .bird-tail {
+  position: absolute;
+  width: 30%;
+  height: 20%;
+  top: 40%;
+  left: -15%;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background-color: currentColor;
+  transform-origin: right center;
+}
+
+/* Bird colors */
+:root:not([data-theme="dark"]) .bird-blue {
+  color: #2196F3;
+}
+
+:root:not([data-theme="dark"]) .bird-red {
+  color: #F44336;
+}
+
+:root:not([data-theme="dark"]) .bird-yellow {
+  color: #FFC107;
+}
+
+:root:not([data-theme="dark"]) .bird-green {
+  color: #4CAF50;
+}
+
+:root:not([data-theme="dark"]) .bird-purple {
+  color: #9C27B0;
+}
+
+/* Wing flapping animation */
+@keyframes flap-wings {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(60deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* Bird flight paths */
+@keyframes fly-path-1 {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(100px, 50px) rotate(15deg);
+  }
+  50% {
+    transform: translate(200px, 0) rotate(0deg);
+  }
+  75% {
+    transform: translate(300px, 50px) rotate(-15deg);
+  }
+  100% {
+    transform: translate(400px, 0) rotate(0deg);
+  }
+}
+
+@keyframes fly-path-2 {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  20% {
+    transform: translate(80px, -30px) rotate(-10deg);
+  }
+  40% {
+    transform: translate(160px, 0) rotate(0deg);
+  }
+  60% {
+    transform: translate(240px, -30px) rotate(-10deg);
+  }
+  80% {
+    transform: translate(320px, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate(400px, -30px) rotate(-10deg);
+  }
+}
+
+@keyframes fly-path-3 {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  30% {
+    transform: translate(120px, 70px) rotate(20deg);
+  }
+  60% {
+    transform: translate(240px, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate(360px, 70px) rotate(20deg);
+  }
+}
+
+@keyframes fly-path-4 {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  15% {
+    transform: translate(60px, -50px) rotate(-15deg);
+  }
+  30% {
+    transform: translate(120px, 0) rotate(0deg);
+  }
+  45% {
+    transform: translate(180px, -50px) rotate(-15deg);
+  }
+  60% {
+    transform: translate(240px, 0) rotate(0deg);
+  }
+  75% {
+    transform: translate(300px, -50px) rotate(-15deg);
+  }
+  90% {
+    transform: translate(360px, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate(420px, -50px) rotate(-15deg);
+  }
+}
+
+@keyframes fly-path-5 {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(100px, 30px) rotate(10deg);
+  }
+  50% {
+    transform: translate(200px, 0) rotate(0deg);
+  }
+  75% {
+    transform: translate(300px, 30px) rotate(10deg);
+  }
+  100% {
+    transform: translate(400px, 0) rotate(0deg);
+  }
+}
+
+/* Bird formations */
+:root:not([data-theme="dark"]) .bird-formation-v {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+}
+
+:root:not([data-theme="dark"]) .bird-formation-v .bird {
+  margin-bottom: -5px;
+}
+
+:root:not([data-theme="dark"]) .bird-formation-h {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+}
+
+:root:not([data-theme="dark"]) .bird-formation-h .bird {
+  margin-right: -5px;
+}
+
+:root:not([data-theme="dark"]) .bird-formation-diagonal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+  transform: rotate(45deg);
+}
+
+:root:not([data-theme="dark"]) .bird-formation-diagonal .bird {
+  margin-right: -5px;
+}
+
+/* Bird sizes */
+:root:not([data-theme="dark"]) .bird-small {
+  transform: scale(0.7);
+}
+
+:root:not([data-theme="dark"]) .bird-medium {
+  transform: scale(1);
+}
+
+:root:not([data-theme="dark"]) .bird-large {
+  transform: scale(1.3);
+}
+
+/* Bird flight speeds */
+:root:not([data-theme="dark"]) .bird-slow {
+  animation-duration: 20s;
+}
+
+:root:not([data-theme="dark"]) .bird-medium-speed {
+  animation-duration: 15s;
+}
+
+:root:not([data-theme="dark"]) .bird-fast {
+  animation-duration: 10s;
+}
+
+/* Bird wing flapping speeds */
+:root:not([data-theme="dark"]) .wing-slow {
+  animation: flap-wings 1.5s infinite;
+}
+
+:root:not([data-theme="dark"]) .wing-medium {
+  animation: flap-wings 1s infinite;
+}
+
+:root:not([data-theme="dark"]) .wing-fast {
+  animation: flap-wings 0.7s infinite;
+}
+
+/* Bird flight heights */
+:root:not([data-theme="dark"]) .bird-low {
+  top: 70%;
+}
+
+:root:not([data-theme="dark"]) .bird-medium-height {
+  top: 50%;
+}
+
+:root:not([data-theme="dark"]) .bird-high {
+  top: 30%;
+}
+
+/* Bird flight paths */
+:root:not([data-theme="dark"]) .fly-path-1 {
+  animation: fly-path-1 15s linear infinite;
+}
+
+:root:not([data-theme="dark"]) .fly-path-2 {
+  animation: fly-path-2 18s linear infinite;
+}
+
+:root:not([data-theme="dark"]) .fly-path-3 {
+  animation: fly-path-3 12s linear infinite;
+}
+
+:root:not([data-theme="dark"]) .fly-path-4 {
+  animation: fly-path-4 20s linear infinite;
+}
+
+:root:not([data-theme="dark"]) .fly-path-5 {
+  animation: fly-path-5 16s linear infinite;
 } 
