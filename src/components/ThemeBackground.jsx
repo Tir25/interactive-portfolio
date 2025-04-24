@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
 // import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
+import TreeAnimation from './TreeAnimation';
+import AnimatedBirds from './AnimatedBirds';
 
 const ThemeBackground = () => {
   const { theme, THEMES } = useTheme();
@@ -396,16 +398,12 @@ const ThemeBackground = () => {
               }}
             />
           </div>
-          
-          {/* Birds - limited to 3 for simplicity */}
-          {[...Array(3)].map((_, i) => (
-            <Bird 
-              key={`bird-${i}`}
-              x={10 + (i * 15)}
-              y={10 + (i * 10)}
-              size={6 + (i * 2)}
-            />
-          ))}
+
+          {/* Tree Animation */}
+          <TreeAnimation />
+
+          {/* Bird Animation */}
+          <AnimatedBirds />
         </div>
       )}
     </div>
