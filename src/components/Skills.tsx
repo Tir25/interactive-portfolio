@@ -52,26 +52,6 @@ const Skills: React.FC = () => {
       color: 'from-blue-600 to-indigo-600'
     },
     { 
-      name: 'Java', 
-      icon: '☕', 
-      level: 3, 
-      xp: 7600, 
-      maxXp: 10000,
-      description: 'Object-oriented language designed for portability and security',
-      useCases: ['Enterprise Applications', 'Android Development', 'Web Services'],
-      color: 'from-red-500 to-orange-500'
-    },
-    { 
-      name: 'Advanced Java', 
-      icon: '☕+', 
-      level: 3, 
-      xp: 6900, 
-      maxXp: 10000,
-      description: 'Advanced Java concepts including multithreading and server-side development',
-      useCases: ['Enterprise Systems', 'Concurrent Programming', 'Backend Services'],
-      color: 'from-orange-600 to-red-600'
-    },
-    { 
       name: 'JavaScript', 
       icon: '🟨', 
       level: 4, 
@@ -100,36 +80,6 @@ const Skills: React.FC = () => {
       description: 'Server-side scripting language for web development',
       useCases: ['Server-side Programming', 'CMS Development', 'Web Applications'],
       color: 'from-indigo-400 to-purple-600'
-    },
-    { 
-      name: '.NET', 
-      icon: '🔷', 
-      level: 2, 
-      xp: 5800, 
-      maxXp: 10000,
-      description: 'Microsoft framework for building Windows and web applications',
-      useCases: ['Windows Applications', 'Web Services', 'Enterprise Solutions'],
-      color: 'from-blue-400 to-purple-500'
-    },
-    { 
-      name: 'DBMS', 
-      icon: '🗄️', 
-      level: 3, 
-      xp: 7300, 
-      maxXp: 10000,
-      description: 'Database Management Systems for storing and retrieving data',
-      useCases: ['Data Storage', 'Data Retrieval', 'Data Management'],
-      color: 'from-green-500 to-teal-500'
-    },
-    { 
-      name: 'Advanced DBMS', 
-      icon: '📊', 
-      level: 3, 
-      xp: 6800, 
-      maxXp: 10000,
-      description: 'Advanced database concepts including normalization and optimization',
-      useCases: ['Database Design', 'Query Optimization', 'Data Modeling'],
-      color: 'from-teal-500 to-green-600'
     },
     { 
       name: 'React', 
@@ -225,13 +175,13 @@ const Skills: React.FC = () => {
       </MotionH2>
       
       <MotionDiv 
-        className="max-w-6xl mx-auto px-4 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+        className="max-w-6xl mx-auto px-2 sm:px-4 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8"
         variants={staggerContainer}
       >
         {skills.map((skill, index) => (
           <MotionDiv 
             key={skill.name}
-            className="perspective-1000 h-64 w-full cursor-pointer"
+            className="h-64 w-full cursor-pointer [perspective:1000px]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
@@ -239,11 +189,12 @@ const Skills: React.FC = () => {
             onClick={() => toggleFlip(skill.name)}
           >
             <MotionDiv 
-              className={`relative w-full h-full transform-style-3d transition-transform duration-500 ${flippedCards[skill.name] ? 'rotate-y-180' : ''}`}
+              className={`relative w-full h-full [transform-style:preserve-3d] transition-transform duration-500 ${flippedCards[skill.name] ? 'rotate-y-180' : ''}`}
             >
               {/* Front of card */}
               <MotionDiv 
-                className={`absolute w-full h-full backface-hidden glass-effect rounded-xl p-6 flex flex-col items-center justify-center text-center overflow-hidden ${flippedCards[skill.name] ? '' : 'hover:blue-glow'}`}
+                className={`absolute w-full h-full [transform-style:preserve-3d] [backface-visibility:hidden] glass-effect rounded-xl p-6 flex flex-col items-center justify-center text-center overflow-hidden ${flippedCards[skill.name] ? '' : 'hover:blue-glow'}`}
+              style={{ WebkitBackfaceVisibility: 'hidden' }}
                 whileHover={{ boxShadow: "0 0 20px rgba(59, 130, 246, 0.7)" }}
               >
                 {/* Decorative background glow */}
@@ -281,7 +232,8 @@ const Skills: React.FC = () => {
               
               {/* Back of card */}
               <MotionDiv 
-                className="absolute w-full h-full backface-hidden rotate-y-180 glass-effect rounded-xl p-6 flex flex-col justify-between overflow-hidden hover:purple-glow"
+                className="absolute w-full h-full [transform-style:preserve-3d] [backface-visibility:hidden] rotate-y-180 glass-effect rounded-xl p-6 flex flex-col justify-between overflow-hidden hover:purple-glow"
+                style={{ WebkitBackfaceVisibility: 'hidden' }}
                 whileHover={{ boxShadow: "0 0 20px rgba(139, 92, 246, 0.7)" }}
               >
                 <div className={`absolute -top-16 -left-16 w-40 h-40 rounded-full bg-gradient-to-r ${skill.color} opacity-30 blur-2xl`}></div>

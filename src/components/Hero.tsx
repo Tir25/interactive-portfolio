@@ -19,13 +19,13 @@ const Hero: React.FC = () => {
         variants={fadeIn}
       >
         <MotionH1 
-          className="text-5xl font-bold mb-4"
+          className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4"
           variants={slideUp}
         >
           Hii I am <MotionSpan className="twinkle-text">Tirth Raval</MotionSpan>
         </MotionH1>
         <MotionP 
-          className="text-xl mb-6 max-w-lg text-center"
+          className="text-lg sm:text-xl mb-6 max-w-lg mx-auto px-4 text-center"
           variants={slideUp}
         >
           If you are wondering where I am right now, probably somewhere between coffee and code.

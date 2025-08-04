@@ -1,0 +1,10 @@
+[33md1dd541[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m fix: correct GitHub links by removing .git extension
+[33md8450f0[m chore: update dependencies and component styles
+[33m8d21b83[m feat: integrate EmailJS for contact form functionality
+[33m029cded[m Fix MIME type issues for Netlify deployment
+[33m174f409[m Improve Timeline animation and design for smoother transitions and better performance
+[33m942e64f[m Fix theme switching and AnimatedBirds component hooks
+[33mf14d7d2[m Add tree and bird animations to theme background
+[33m796ada4[m[33m ([m[1;31morigin/fix/theme-switching[m[33m)[m Fix: Update build configuration and script loading for GitHub Pages
+[33m33478f9[m Fix: Add base URL for GitHub Pages deployment
+[33mf17d80c[m Update: Theme implementation and component improvements

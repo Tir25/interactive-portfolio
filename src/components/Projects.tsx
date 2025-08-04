@@ -108,13 +108,13 @@ const Projects: React.FC = () => {
         variants={simpleFadeIn}
       >
         <MotionH2 
-          className="text-4xl font-bold mb-8 md:mb-12 text-center text-white font-playfair"
+          className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8 md:mb-12 text-center text-white font-playfair"
           variants={simpleFadeIn}
         >
           My Projects
         </MotionH2>
         <MotionDiv 
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10"
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-10"
           variants={simpleStagger}
         >
           {projects.map((project, index) => (

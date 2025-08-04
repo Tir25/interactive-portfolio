@@ -352,6 +352,36 @@ section:nth-child(even) {
   .mobile-scroll-container {
     -webkit-overflow-scrolling: touch;
   }
+
+  /* Improve touch targets */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.75rem 1rem;
+  }
+
+  /* Adjust spacing for mobile */
+  section {
+    padding: 3rem 1rem;
+  }
+
+  /* Improve form elements on mobile */
+  input, textarea, select {
+    font-size: 16px !important; /* Prevent zoom on iOS */
+    padding: 0.75rem !important;
+  }
+
+  /* Better card layouts on mobile */
+  .glass-effect {
+    backdrop-filter: blur(8px); /* Lighter blur for better performance */
+  }
+
+  /* Optimize animations for mobile */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
 }
 
 /* Tablet optimizations */
